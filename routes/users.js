@@ -3,12 +3,15 @@
 const express = require('express');
 
 // eslint-disable-next-line new-cap
-const router = express.Router();
 const knex = require('../knex');
+const bodyParser = require('body-parser');
 const boom = require('boom');
-const bcrypt = require('bcrypt');
-const { camelizeKeys, decamelizeKeys } =
-require('humps');
+const bcrypt = require('bcrypt-as-promised');
+const jwt = require('jsonwebtoken');
+const { camelizeKeys, decamelizeKeys } = require('humps');
+// const dotenv = require('dotenv');
+const router = express.Router();
+
 
 router.post('/users', (req, res, next) => {
   var hash = bcrypt.hashSync(req.body.password, 8);
